@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwFood - Aggiornamento quantità ingrediente</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<!--	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>-->
+	<h1 th:text="'Modifica la quantità del '+${ingredient.name}+' per la ricetta '+${recipe.title}">...</h1>
+	<div th:if="${ingredient}">
+		<div>
+			<h1>Nome: <i th:text="${ingredient.name}">Nome</i></h1>
+		</div>
+		<div><span><img width="15%" th:src=${ingredient.image} /></span></div>
+		<form th:action="@{/addQuantityToIngredient}" method="POST">
+			<div>Quantità:
+				<span><input type="text" th:value="${recipeingredient.quantity}" name="quantity" /></span>
+			</div>
+			<div><input type="submit" value="Conferma" /></div>
+		</form>
+	</div>
+	<div th:unless="${ingredient}">Ingrediente non presente in archivio</div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwFood - Cerca chef per nome</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<!--	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>-->
+	<h1>Cerca chef in base al nome e cognome</h1>
+	<form th:action="@{/searchChefsByName}" method="POST">
+		<div>Nome:
+			<span><input type="text" th:value="${name}" name="name" /></span>
+		</div>
+		<div>Cognome:
+			<span><input type="text" th:value="${surname}" name="surname" /></span>
+		</div>
+		<div><input type="submit" value="Cerca" /></div>
+	</form>
+</body>
+
+</html>

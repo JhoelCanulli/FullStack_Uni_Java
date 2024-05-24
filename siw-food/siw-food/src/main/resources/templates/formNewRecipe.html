@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwFood - Inserimento nuova ricetta</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<!--	<div>-->
+	<!--		<a href="/"><img src="/images/logo-siw.png" width="50%" /></a>-->
+	<!--	</div>-->
+	<h1>Inserimento di una nuova ricetta</h1>
+	<form th:action="@{/recipe}" method="POST" th:object="${recipe}">
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<p th:each="err: ${#fields.hasGlobalErrors()}">Ricetta già presente nel sistema</p>
+		</div>
+		<div>Titolo:
+			<span><input type="text" th:field="${recipe.title}" /></span>
+			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Titolo non valido</span>
+		</div>
+		<div>Descrizione:
+			<span><input type="text" th:field="${recipe.description}" /></span>
+			<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Descrizione non valida</span>
+		</div>
+
+		<!--		manca inserimento ingredienti-->
+
+		<div>Immagine:
+			<span><input type="text" th:field="${recipe.image}" /></span>
+		</div>
+		<div>
+			<span><button type="submit">CONFERMA</button></span>
+		</div>
+	</form>
+</body>
+
+</html>

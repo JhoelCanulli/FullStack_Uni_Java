@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwFood - Aggiornamento dati ricetta</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<!--	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>-->
+	<h1>Modifica la ricetta</h1>
+	<div th:if="${recipe}">
+		<div>
+			<h1>Titolo: <i th:text="${recipe.title}">Titolo</i></h1>
+		</div>
+		<div><span><img width="15%" th:src=${recipe.image} /></span></div>
+		<div th:if="${recipe.writer}">
+			<div>Autore: <i th:text="${recipe.writer.name} + ' ' + ${recipe.writer.surname}">Nome
+					Cognome</i></div>
+			<div><a th:href="@{'/addAuthor/' + ${recipe.id}}">Modifica autore</a></div>
+		</div>
+		<div th:unless="${recipe.writer}">
+			<a th:href="@{'/addAuthor/' + ${recipe.id}}">Aggiungi autore</a>
+		</div>
+	</div>
+	<div>
+		<span>Ingredienti:</span>
+		<ul>
+			<li th:each="recipeIngredient: ${recipe.recipeIngredients}">
+				<span th:text="${recipeIngredient.ingredient.name}+', '+${recipeIngredient.quantity}">Nome, Quantità</span>
+			</li>
+		</ul>
+		<div>
+			<a th:href="@{'/updateRecipeIngredients/' + ${recipe.id}}">
+				<button type="button">Modifica ingredienti</button>
+			</a>
+		</div>
+	</div>
+	<div th:unless="${recipe}">Ricetta non presente in archivio</div>
+</body>
+
+</html>

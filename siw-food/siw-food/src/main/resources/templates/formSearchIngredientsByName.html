@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwFood - Cerca ingredienti per nome</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<!--	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>-->
+	<h1>Cerca ingredienti in base al nome</h1>
+	<form th:action="@{/searchIngredientsByName}" method="POST">
+		<div>Nome:
+			<span><input type="text" th:value="${name}" name="name" /></span>
+		</div>
+		<div><input type="submit" value="Cerca" /></div>
+	</form>
+</body>
+
+</html>
