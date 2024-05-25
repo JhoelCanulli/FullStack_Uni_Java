@@ -2,6 +2,7 @@ package it.uniroma3.siw.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,8 +17,14 @@ public interface ChefRepository extends CrudRepository<Chef, Long> {
 
 	public List<Chef> findByNameAndSurname(String name, String surname);
 
+	Optional<Chef> findByUsername(String username);
+	
 	public List<Chef> findByBirth(LocalDate birth);
+	
+	boolean existsByEmail(String email);
 
+    Optional<Chef> findByEmail(String email);
+    
 	public boolean existsByNameAndSurnameAndBirth(String name, String surname, LocalDate birth);
 
 	public Chef findByNameAndSurnameAndBirth(String name, String surname, LocalDate birth);
