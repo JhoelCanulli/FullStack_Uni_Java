@@ -37,7 +37,6 @@ public class AuthenticationService {
 	@Autowired
     private AuthenticationManager authenticationManager;
 
-
     public AuthenticationResponse register(Chef request) {
 
         // check if user already exist. if exist than authenticate the user
@@ -47,9 +46,10 @@ public class AuthenticationService {
 
         Chef chef = new Chef();
         chef.setName(request.getName());
+        chef.setSurname(request.getSurname());
         chef.setUsername(request.getUsername());
         chef.setPassword(passwordEncoder.encode(request.getPassword()));
-
+        
         chef.setRole(request.getRole());
         
         chef = repository.save(chef);

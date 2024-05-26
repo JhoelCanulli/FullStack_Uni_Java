@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './forgotpassword.component.css'
 })
 export class ForgotpasswordComponent {
-
+  
 }
