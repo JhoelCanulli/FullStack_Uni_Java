@@ -1,7 +1,6 @@
 ti elenco le cose che mancano da fare, non per dirti di farle a te ma più che altro per fare io mente locale
+- crea DTL per tutti i models
 - aggiornare le form per gli inserimenti di nuovi chef (aggiungere la possibilità di selezionare ricette già scritte) e di nuove ricette (aggiungere la possibilità di impostare subito l'autore e gli ingredienti)
-- creare ed impostare l'interfaccia di autenticazione e login degli utenti con relativa visualizzazione di operazioni private (vedi requisiti prof)
-- creare immagini ed icone ed impostare i riferimenti
 - importare le immagini relative alle entità del sistema ed implementare lo scambio ed il set di file anziché stringhe url
 - rimuovere/modificare operazioni non richieste e/o superflue
 - ricontrollare il codice affinché le operazioni di ricerca e recupero entità siano effettuate attraverso query sul DBMS e non nel codice (dovrebbe essere già corretto)
