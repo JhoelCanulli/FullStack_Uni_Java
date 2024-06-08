@@ -10,30 +10,31 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.service.CredentialService;
 import jakarta.servlet.http.HttpServletRequest;
-import it.uniroma3.siw.dto.UserDTO;
+import it.uniroma3.siw.dtl.CredentialDTL;
 import it.uniroma3.siw.mapper.UserConverter;
 import it.uniroma3.siw.model.Chef;
 import it.uniroma3.siw.model.Role;
+import it.uniroma3.siw.model.Credential;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private CredentialService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
-        System.out.println("Attempting to register user: " + userDTO.getUsername());
+    public ResponseEntity<CredentialDTL> register(@RequestBody CredentialDTL userDTL) {
+        System.out.println("Attempting to register user: " + userDTL.getUnam());
         try {
-            if ("admin".equalsIgnoreCase(userDTO.getUsername())) {
+            if ("admin".equalsIgnoreCase(userDTL.getUnam())) {
                 return ResponseEntity.badRequest().body(null);
             }
             
-            Chef user = userService.registerNewUser(userDTO);
-            return ResponseEntity.ok(UserConverter.toDTO(user)); 
+            Credential user = userService.registerNewUser(userDTL);
+            return ResponseEntity.ok(UserConverter.toDTL(user)); 
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(null);
         }
@@ -56,9 +57,9 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+    public ResponseEntity<CredentialDTL> getUserByUsername(@PathVariable String username) {
         return userService.getUserByUsername(username)
-                .map(user -> new ResponseEntity<>(UserConverter.toDTO(user), HttpStatus.OK))
+                .map(user -> new ResponseEntity<>(UserConverter.toDTL(user), HttpStatus.OK))
                 .orElse(new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 }

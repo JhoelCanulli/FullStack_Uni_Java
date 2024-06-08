@@ -1,22 +1,22 @@
 package it.uniroma3.siw.mapper;
 
-import it.uniroma3.siw.dto.UserDTO;
-import it.uniroma3.siw.model.Chef;
+import it.uniroma3.siw.dtl.CredentialDTL;
+import it.uniroma3.siw.model.Credential;
 
 public class UserConverter {
-    public static UserDTO toDTO(Chef user) {
-        UserDTO dto = new UserDTO();
-        dto.setUsername(user.getUsername());
-        dto.setPassword(user.getPassword());  // In genere non si passa la password al client
-        dto.setRole(user.getRole());
-        return dto;
+    public static CredentialDTL toDTL(Credential user) {
+        CredentialDTL dtl = new CredentialDTL();
+        dtl.setUnam(user.getUsername());
+        dtl.setPwrd(user.getPassword());  
+        dtl.setRole(user.getRole());
+        return dtl;
     }
 
-    public static Chef toEntity(UserDTO dto) {
-        Chef user = new Chef();
-        user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
-        user.setRole(dto.getRole());
+    public static Credential toEntity(CredentialDTL dtl) {
+    	Credential user = new Credential();
+        user.setUsername(dtl.getUnam());
+        user.setPassword(dtl.getPwrd());
+        user.setRole(dtl.getRole());
         return user;
     }
 }

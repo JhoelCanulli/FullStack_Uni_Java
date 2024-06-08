@@ -4,43 +4,56 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
 @Entity
 @Table(name = "app_user")	//user è una parola chiave per il dbms
-public class AppUser implements UserDetails  {
+public class Credential implements UserDetails  {
 
 	private static final long serialVersionUID = 1L;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "uuid", unique = true)
+    private String uuid;
 
     @NotBlank
     @Column(unique = true)
-    private String username;
+    protected String username;
 
     @NotBlank
-    private String password;
+    protected String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+	protected Role role;
 
-    public AppUser() {}
+	@Valid
+	@OneToOne(cascade = CascadeType.ALL)
+	private Chef chef;
 
-    public AppUser(String username, String password, Role role) {
+    public Credential() {}
+
+    public Credential(String username, String password, Role role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -79,6 +92,14 @@ public class AppUser implements UserDetails  {
         this.role = role;
     }
     
+	public Chef getChef() {
+		return chef;
+	}
+
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+    
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -103,4 +124,5 @@ public class AppUser implements UserDetails  {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
+    
 }
