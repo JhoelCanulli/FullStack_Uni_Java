@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SiwTheatre - Nuovo biglietto per opera</title>
+	<link rel="stylesheet" href="/css/stile.css">
+</head>
+
+<body>
+
+	<header>
+		<!-- Intestazione di esempio, puoi aggiungere elementi personalizzati -->
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Inserisci un nuovo biglietto</h1>
+	<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
+
+	<form th:action="@{/admin/newTicket}" method="POST">
+
+		<!--		 Campo nascosto per passare l'opera-->
+		<input type="hidden" name="operaId" th:value="${opera.id}">
+
+		<h3>Dettagli</h3>
+		<div>
+			<label for="dateEvent">Data evento: </label>
+			<input type="date" id="dateEvent" th:name="dateEvent" th:value="${ticket.dateEvent}" required />
+		</div>
+		<!-- Campi di testo: prezzo,tipo,ora -->
+		<div>
+			<label for="type">Tipologia: </label>
+			<input type="text" id="type" name="type" th:field="*{ticket.type}" required />
+		</div>
+		<div>
+			<label for="price">Prezzo(euro): </label>
+			<input type="text" id="price" name="price" th:field="*{ticket.price}" required />
+		</div>
+
+		<!-- Bottone di invio -->
+		<button type="submit">Aggiungi Biglietto</button>
+	</form>
+
+</body>
+
+</html>

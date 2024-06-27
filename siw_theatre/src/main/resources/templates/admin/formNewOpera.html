@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SiwTheatre - Nuova Opera</title>
+	<link rel="stylesheet" href="/css/stile.css">
+</head>
+
+<body>
+
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Inserisci una nuova opera</h1>
+	<form th:action="@{/admin/newOpera}" method="POST" enctype="multipart/form-data">
+
+		<!-- Campo nascosto per passare l'opera (se necessario) -->
+		<input type="hidden" name="operaId" th:value="${opera.id}">
+
+		<!-- Campo per i dettagli dell'opera -->
+		<h3>Dettagli</h3>
+		<div>
+			<label for="name">Nome:</label>
+			<input type="text" id="name" name="name" th:field="*{opera.name}" required />
+		</div>
+		<div>
+			<label for="name">Year:</label>
+			<input type="text" id="year" name="year" th:field="*{opera.year}" />
+		</div>
+
+		<!-- Campo per la descrizione -->
+		<div>
+			<label for="description">Descrizione:</label>
+			<textarea id="description" name="description" th:field="*{opera.description}" required></textarea>
+		</div>
+
+		<div>
+			<label for="time">Durata(min): </label>
+			<input type="text" id="time" name="time" th:field="*{opera.time}" required />
+		</div>
+		<div>
+			<label for="uploadedImage"> Carica immagine di copertina:</label>
+			<input type="file" id="uploadedImage" th:name="uploadedImage" accept="image/*" />
+		</div>
+
+
+		<!-- Bottone di invio -->
+		<button type="submit">Aggiungi Opera</button>
+	</form>
+
+</body>
+
+</html>

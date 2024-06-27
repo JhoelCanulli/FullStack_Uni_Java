@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Gestione aggiunta ticket ad opera</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Gestione dei biglietti per</h1>
+	<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
+
+
+	<h3>Biglietti disponibili:</h3>
+	<ul>
+		<li th:each="ticket: ${opera.tickets}">
+			<a th:href="@{'/client/ticket/' + ${ticket.id}}"
+				th:text="${ticket.dateEvent}+'   cat: '+${ticket.type}">Data evento
+				+ tipo</a>
+			<form th:action="@{'/admin/deleteTicketFromOpera/' + ${ticket.id} +'/'+${opera.id}}" method="POST">
+				<button type="submit">Rimuovi</button>
+			</form>
+		</li>
+	</ul>
+
+	<h3>Aggiungi altri biglietti:</h3>
+	<ul>
+		<li>
+			<a th:href="@{'/admin/formNewTicket/'+${opera.id}}">Modulo per aggiungere un biglietto</a>
+		</li>
+	</ul>
+
+	<div>
+		<a href="/admin/manageOperas"><button type="button">Fine</button></a>
+	</div>
+</body>
+
+</html>

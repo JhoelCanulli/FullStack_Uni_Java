@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SiwTheatre - Nuovo Attore</title>
+	<link rel="stylesheet" href="/css/stile.css">
+</head>
+
+<body>
+
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Aggiungi un nuovo attore</h1>
+	<form th:action="@{/admin/newActor}" method="POST" enctype="multipart/form-data">
+
+		<!-- Campo nascosto per passare l'opera (se necessario) -->
+		<input type="hidden" name="actorId" th:value="${actor.id}">
+
+		<h3>Dati anagrafici</h3>
+		<!-- Campo per i dettagli dell'opera -->
+		<div>
+			<label for="name">Nome: </label>
+			<input type="text" id="name" name="name" th:field="*{actor.name}" required />
+		</div>
+		<div>
+			<label for="name">Cognome: </label>
+			<input type="text" id="name" name="name" th:field="*{actor.surname}" required />
+		</div>
+		<div>
+			<label for="dateOfBirth">Data di nascita: </label>
+			<input type="date" id="dateOfBirth" th:name="dateOfBirth" th:value="${actor.dateOfBirth}" />
+		</div>
+
+		<!-- Sezione per l'immagine-->
+		<div>
+			<label for="uploadedImage"> Carica foto:</label>
+			<input type="file" id="uploadedImage" th:name="uploadedImage" accept="image/*" />
+		</div>
+
+
+		<!-- Bottone di invio -->
+		<button type="submit">Aggiungi Attore</button>
+	</form>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Lista Attori</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" /></a></div>
+
+	<h1>Attori</h1>
+
+	<h3>Filtri:</h3>
+	<!-- Form per il filtraggio per cognome -->
+	<form action="/public/filterActors" method="GET">
+		<label for="surname">per cognome:</label>
+		<input type="text" id="surname" name="surname">
+		<button type="submit">Filtra</button>
+	</form>
+
+	<h3>Lista:</h3>
+	<div th:if="${actors==null || actors.isEmpty()}">Non ci sono attori nel sistema</div>
+	<ul>
+		<li th:each="actor : ${actors}">
+			<a th:href="@{'/public/actor/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}">Dino
+				Risi</a>
+		</li>
+	</ul>
+</body>
+
+</html>

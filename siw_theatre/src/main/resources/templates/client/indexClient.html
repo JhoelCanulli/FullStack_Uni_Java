@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Homepage client</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><img src="/images/logo-siwtheatre.png" width="50%" /></div>
+
+	<!-- Stampiamo il nome e il cognome dell'utente loggato -->
+	<h1 th:text="'Benvenuto, ' + ${name} + ' ' + ${surname}">Benvenuto, utente</h1>
+
+	<h3>Consultazione archivio:</h3>
+	<ul>
+		<li>
+			<a href="/public/operas">Elenco </a><i>delle opere</i>
+		</li>
+		<li>
+			<a href="/public/actors">Elenco </a><i>degli attori</i>
+		</li>
+	</ul>
+
+	<h3>Biglietti:</h3>
+	<ul>
+		<li>
+			<a href="/client/manageTicketsClient">Gestione </a><i>delle prenotazioni</i>
+		</li>
+	</ul>
+
+	<h3>Profilo:</h3>
+	<ul>
+		<li>
+			<a href="/client/showAccount">Visualizza profilo</a>
+		</li>
+		</li>
+		<li>
+			<a href="/client/updateAccount">Aggiorna profilo</a>
+		</li>
+	</ul>
+</body>
+
+</html>

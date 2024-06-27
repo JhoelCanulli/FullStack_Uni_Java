@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Homepage admin</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Operazioni riservate all'admin</h1>
+
+	<h3>Consultazione archivio:</h3>
+	<ul>
+		<li>
+			<a href="/public/operas">Elenco </a><i>delle opere</i>
+		</li>
+		<li>
+			<a href="/public/actors">Elenco </a><i>degli attori</i>
+		</li>
+		<li>
+			<a href="/admin/profiles">Elenco </a><i>degli utenti</i>
+		</li>
+	</ul>
+
+	<div>
+		<h3>Gestione archivio:</h3>
+	</div>
+	<ul>
+		<li>
+			<a href="/admin/manageOperas">Gestione </a><i>delle opere</i>
+		</li>
+		<li>
+			<a href="/admin/manageActors">Gestione </a><i>degli attori</i>
+		</li>
+		<li>
+			<a href="/admin/manageProfiles">Gestione </a><i>degli utenti</i>
+		</li>
+	</ul>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwThetare - Homepage public</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><img src="/images/logo-siwtheatre.png"></div>
+
+	<h1>Benvenuto su Siw Theatre</h1>
+
+	<h3>Consultazione archivio:</h3>
+	<ul>
+		<li>
+			<a href="/public/operas">Elenco </a><i>delle opere</i>
+		</li>
+		<li>
+			<a href="/public/actors">Elenco </a><i>degli attori</i>
+		</li>
+	</ul>
+	<h3>...</h3>
+	<div> <i>Se ancora non lo hai fatto, </i><a href="/public/register">registrati al nostro sito</a></div>
+	<div> <i>oppure clicca in alto a destra per accedere</i></div>
+</body>
+
+</html>

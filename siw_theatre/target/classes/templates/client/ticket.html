@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Scheda biglietto</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Dettagli biglietto</h1>
+
+	<div th:if="${ticket}">
+		<p>Data:
+			<span th:if="${ticket.dateEvent}" th:text="${ticket.dateEvent}"></span>
+		</p>
+
+		<p>Opera: <span th:text="${ticket.opera.name}"></span> </p>
+		<p>Durata: <span th:text="${ticket.opera.time}"></span> min</p>
+
+		<p>Prezzo: <span th:text="${ticket.price}"></span> euro</p>
+		<p>Tipologia: <span th:text="${ticket.type}"></span> </p>
+	</div>
+	<div th:unless="${ticket}">Il biglietto richiesto non esiste</div>
+
+</body>
+
+</html>

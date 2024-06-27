@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Scheda attore</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Informazion sull'attore</h1>
+
+	<h3>Dati anagrafici</h3>
+	<div th:if="${actor}">
+		<p>Nome: <span th:text="${actor.name}"></span> </p>
+		<p>Cognome: <span th:text="${actor.surname}"></span> </p>
+		<p>Data di nascita:
+			<span th:unless="${actor.dateOfBirth}">Non definita</span>
+			<span th:if="${actor.dateOfBirth}" th:text="${actor.dateOfBirth}"></span>
+		</p>
+
+		<h4>Foto:</h4>
+		<div th:if="${base64Image}">
+			<img th:src="'data:image/jpeg;base64,' + ${base64Image}" alt="Foto dell'attore"
+				style="max-width: 150px; height: auto;" />
+		</div>
+	</div>
+	<div th:unless="${actor}">Non esiste l'attore richiesto</div>
+
+</body>
+
+</html>

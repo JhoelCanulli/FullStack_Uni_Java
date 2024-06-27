@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Gestione attori di un opera</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Gestione attori per</h1>
+	<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
+
+	<h3>aggiunti:</h3>
+	<ul>
+		<li th:each="actor: ${opera.actors}">
+			<a th:href="@{'/public/actor/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}">Anagrafica
+				attore</a>
+			<form th:action="@{'/admin/deleteActorFromOpera/' + ${actor.id} +'/'+${opera.id}}" method="POST">
+				<button type="submit">Rimuovi</button>
+			</form>
+		</li>
+	</ul>
+
+	<h3>in archivio:</h3>
+	<ul>
+		<li th:each="actorN : ${actorsToAdd}">
+			<a th:href="@{'/public/actor/' + ${actorN.id}}"
+				th:text="${actorN.name} + ' ' + ${actorN.surname}">Anagrafica
+				attore</a>
+			<form th:action="@{'/admin/addActorToOpera/' + ${actorN.id}+'/'+${opera.id}}" method="POST">
+				<button type="submit">Aggiungi</button>
+			</form>
+		</li>
+	</ul>
+
+	<h3>Altre operazioni:</h3>
+	<ul>
+		<li>
+			<a href="/admin/formNewActor">Inserisci un nuovo attore in archivio</a>
+		</li>
+	</ul>
+	<div>
+		<a href="/admin/manageOperas"><button type="button">Fine</button></a>
+	</div>
+</body>
+
+</html>

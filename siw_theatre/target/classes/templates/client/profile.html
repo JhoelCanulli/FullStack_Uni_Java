@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Siw Theatre - Scheda Client</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Informazioni del profilo</h1>
+
+	<h3>Dati anagrafici</h3>
+	<div th:if="${client}">
+		<p>Nome: <span th:text="${client.name}"></span> </p>
+		<p>Cognome: <span th:text="${client.surname}"></span> </p>
+		<p>Data di nascita:
+			<span th:unless="${client.dateOfBirth}">Non definita</span>
+			<span th:if="${client.dateOfBirth}" th:text="${client.dateOfBirth}"></span>
+		</p>
+		<p>Numero di telefono: <span th:text="${client.phone}"></span> </p>
+
+		<h4>Immagine dello profilo:</h4>
+		<div th:if="${base64Image}">
+			<img th:src="'data:image/jpeg;base64,' + ${base64Image}" alt="Foto dell'utente"
+				style="max-width: 150px; height: auto;" />
+		</div>
+
+		<h3>Biglietti:</h3>
+		<div th:if="${client.tickets==null || client.tickets.isEmpty()}">Non ci sono prenotazioni a tuo nome</div>
+		<ul>
+			<li th:each="ticket: ${client.tickets}">
+				<a th:href="@{'/client/ticket/' + ${ticket.id}}"
+					th:text="${ticket.opera.name}+'  date: '+${ticket.dateEvent}"></a>
+			</li>
+		</ul>
+	</div>
+	<div th:unless="${client}">Non esiste</div>
+
+</body>
+
+</html>

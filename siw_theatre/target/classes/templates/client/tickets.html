@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Biglietti prenotabili</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Prenotazione biglietti</h1>
+
+	<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
+
+	<h3>Biglietti disponibili: </h3>
+	<ul>
+		<li th:each="ticket : ${ticketsToAdd}">
+			<a th:href="@{'/client/ticket' + '/' + ${ticket.id}}"
+				th:text="${ticket.dateEvent}+' - '+${ticket.type}+' - '+${ticket.price}">Dettagli biglietto</a>
+			<form th:action="@{'/client/reserveTicketForOperaToClient/'+${ticket.id}+'/'+${opera.id}}" method="POST">
+				<button type="submit">Prenota</button>
+			</form>
+		</li>
+	</ul>
+	<div>
+		<a href="/client/operasOnPlan"><button type="button">Indietro</button></a>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Lista Clients</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Profili registrati</h1>
+
+	<h3>Filtri:</h3>
+	<!-- Form per il filtraggio per cognome -->
+	<form action="/admin/filterProfiles" method="GET">
+		<label for="surname">per cognome:</label>
+		<input type="text" id="surname" name="surname">
+		<button type="submit">Filtra</button>
+	</form>
+
+	<h3>Lista:</h3>
+	<div th:if="${clients==null || clients.isEmpty()}">Non ci sono utenti nel sistema</div>
+	<ul>
+		<li th:each="client : ${clients}">
+			<a th:href="@{'/client/profile/' + ${client.id}}"
+				th:text="${client.name} + ' ' + ${client.surname}">Anagrafica utente</a>
+		</li>
+	</ul>
+</body>
+
+</html>

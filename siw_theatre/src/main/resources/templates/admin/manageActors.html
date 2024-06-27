@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwTheatre - Gestione operazioni Attori</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Gestisci gli attori</h1>
+
+	<h3>in archivio:</h3>
+	<div th:if="${actors==null || actors.isEmpty()}">Non ci sono attori nel sistema</div>
+	<ul>
+		<li th:each="actor : ${actors}">
+			<a th:href="@{'/public/actor/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}">Anagrafica
+				attore</a>
+			<form th:action="@{'/admin/deleteActor/' + ${actor.id}}" method="POST">
+				<button type="submit">Elimina</button>
+			</form>
+		</li>
+	</ul>
+
+	<h3>Altre operazioni:</h3>
+	<ul>
+		<li>
+			<a href="/admin/formNewActor">Modulo per aggiungere un attore</a>
+		</li>
+	</ul>
+</body>
+
+</html>

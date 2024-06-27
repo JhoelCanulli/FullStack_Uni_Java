@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>SiwThetare - Gestione biglietti/prenotazioni Client</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+	<header>
+		<div th:if="${#request.userPrincipal}">
+			<span th:text="${#request.userPrincipal.principal.username}"></span>
+			<a href="/public/logout">Logout</a>
+		</div>
+		<div th:unless="${#request.userPrincipal}">
+			<a href="/public/login">Login</a>
+		</div>
+	</header>
+
+	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+
+	<h1>Gestisci le tue prenotazioni</h1>
+
+	<h3>Biglietti attivi:</h3>
+	<div th:if="${client.tickets==null || client.tickets.isEmpty()}">Non ci sono prenotazioni a tuo nome</div>
+	<ul>
+		<li th:each="ticket: ${client.tickets}">
+			<a th:href="@{'/client/ticket/' + ${ticket.id}}"
+				th:text="${ticket.opera.name}+'  date: '+${ticket.dateEvent}"></a>
+			<form th:action="@{'/client/deleteReservationForClient/' + ${ticket.id}}" method="POST">
+				<button type="submit">Rimuovi</button>
+			</form>
+		</li>
+	</ul>
+
+	<h3>Prenota:</h3>
+	<ul>
+		<li><a href="/client/operasOnPlan">opere in programma</a></li>
+	</ul>
+</body>
+
+</html>
