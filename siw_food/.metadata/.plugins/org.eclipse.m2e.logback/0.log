@@ -1,0 +1,16 @@
+2024-05-27 17:59:39,613 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-06-27 10:14:36,298 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-06-27 10:14:53,741 [Worker-1: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: it.uniroma3.siw:siw-spring-03:0.0.1-SNAPSHOT @ H:\Triennale\terzo_anno\SECONDO_SEMESTRE\Sistemi_Informativi_sul_Web\progetti\my_git\siw-food\siw_food_be\pom.xml.
+2024-06-27 10:14:54,574 [Worker-1: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /siw_food_be/src/main/java
+2024-06-27 10:14:54,579 [Worker-1: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /siw_food_be/src/main/resources
+2024-06-27 10:14:54,580 [Worker-1: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /siw_food_be/src/main/resources
+2024-06-27 10:14:54,582 [Worker-1: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /siw_food_be/src/test/java
+2024-06-27 10:14:54,583 [Worker-1: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /siw_food_be/src/test/resources
+2024-06-27 10:14:54,883 [Worker-1: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2024-06-27 10:14:59,028 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2024-06-27 10:14:59,032 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2024-06-27 10:14:59,531 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 24 resources
+2024-06-27 10:15:05,286 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2024-06-27 10:15:05,286 [Worker-5: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory H:\Triennale\terzo_anno\SECONDO_SEMESTRE\Sistemi_Informativi_sul_Web\progetti\my_git\siw-food\siw_food_be\src\test\resources
+2024-06-27 10:44:48,375 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-06-29 14:01:21,306 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
