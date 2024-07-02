@@ -2,41 +2,60 @@
 <html>
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SiwTheatre - Lista Attori</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-	<header>
+
+	<header class="d-flex justify-content-between p-3 bg-light">
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/public/logout">Logout</a>
+			<a href="/public/logout" class="btn btn-outline-secondary ml-2">Logout</a>
 		</div>
 		<div th:unless="${#request.userPrincipal}">
-			<a href="/public/login">Login</a>
+			<a href="/public/login" class="btn btn-outline-primary">Login</a>
 		</div>
 	</header>
 
-	<div><a href="/"><img src="/images/logo-siwtheatre.png" /></a></div>
+	<div class="container">
+		<div class="text-center my-4">
+			<a href="/"><img src="/images/logo-siwtheatre.png" class="img-fluid" alt="Logo SIW Theatre" /></a>
+		</div>
 
-	<h1>Attori</h1>
+		<h1 class="text-center my-4">Attori</h1>
 
-	<h3>Filtri:</h3>
-	<!-- Form per il filtraggio per cognome -->
-	<form action="/public/filterActors" method="GET">
-		<label for="surname">per cognome:</label>
-		<input type="text" id="surname" name="surname">
-		<button type="submit">Filtra</button>
-	</form>
+		<h3>Filtri:</h3>
+		<!-- Form per il filtraggio per cognome -->
+		<form action="/public/filterActors" method="GET">
+			<div class="form-row align-items-end mb-3">
+				<div class="col-auto">
+					<label for="surname" class="col-sm-2 col-form-label">Cognome</label>
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" id="surname" name="surname">
+				</div>
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary">Filtra</button>
+				</div>
+			</div>
+		</form>
 
-	<h3>Lista:</h3>
-	<div th:if="${actors==null || actors.isEmpty()}">Non ci sono attori nel sistema</div>
-	<ul>
-		<li th:each="actor : ${actors}">
-			<a th:href="@{'/public/actor/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}">Dino
-				Risi</a>
-		</li>
-	</ul>
+		<h3>Lista:</h3>
+		<div th:if="${actors==null || actors.isEmpty()}">Non ci sono attori nel sistema</div>
+		<ul class="list-group">
+			<li class="list-group-item" th:each="actor : ${actors}">
+				<a th:href="@{'/public/actor/' + ${actor.id}}" th:text="${actor.name} + ' ' + ${actor.surname}">Dino
+					Risi</a>
+			</li>
+		</ul>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

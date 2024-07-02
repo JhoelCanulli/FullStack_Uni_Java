@@ -3,56 +3,74 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SiwTheatre - Nuovo Attore</title>
-	<link rel="stylesheet" href="/css/stile.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-	<header>
+	<header class="d-flex justify-content-between p-3 bg-light">
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/public/logout">Logout</a>
+			<a href="/public/logout" class="btn btn-outline-secondary ml-2">Logout</a>
 		</div>
 		<div th:unless="${#request.userPrincipal}">
-			<a href="/public/login">Login</a>
+			<a href="/public/login" class="btn btn-outline-primary">Login</a>
 		</div>
 	</header>
 
-	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
-
-	<h1>Aggiungi un nuovo attore</h1>
-	<form th:action="@{/admin/newActor}" method="POST" enctype="multipart/form-data">
-
-		<!-- Campo nascosto per passare l'opera (se necessario) -->
-		<input type="hidden" name="actorId" th:value="${actor.id}">
-
-		<h3>Dati anagrafici</h3>
-		<!-- Campo per i dettagli dell'opera -->
-		<div>
-			<label for="name">Nome: </label>
-			<input type="text" id="name" name="name" th:field="*{actor.name}" required />
-		</div>
-		<div>
-			<label for="name">Cognome: </label>
-			<input type="text" id="name" name="name" th:field="*{actor.surname}" required />
-		</div>
-		<div>
-			<label for="dateOfBirth">Data di nascita: </label>
-			<input type="date" id="dateOfBirth" th:name="dateOfBirth" th:value="${actor.dateOfBirth}" />
+	<div class="container">
+		<div class="text-center my-4">
+			<a href="/"><img src="/images/logo-siwtheatre.png" class="img-fluid" alt="Logo SIW Theatre" /></a>
 		</div>
 
-		<!-- Sezione per l'immagine-->
-		<div>
-			<label for="uploadedImage"> Carica foto:</label>
-			<input type="file" id="uploadedImage" th:name="uploadedImage" accept="image/*" />
-		</div>
+		<h1 class="text-center my-4">Aggiungi un nuovo attore</h1>
+
+		<form th:action="@{/admin/newActor}" method="POST" enctype="multipart/form-data">
+
+			<!-- Campo nascosto per passare l'opera (se necessario) -->
+			<input type="hidden" name="actorId" th:value="${actor.id}">
+
+			<h3>Dati anagrafici</h3>
+
+			<div class="row g-3">
+				<div class="col-md-6">
+					<label for="floatingName" class="form-label">Nome</label>
+					<input type="text" class="form-control" id="floatingName" placeholder="nome" required
+						th:field="*{actor.name}" />
+				</div>
+
+				<div class="col-md-6">
+					<label for="floatingSurname" class="form-label">Cognome</label>
+					<input type="text" class="form-control" id="floatingSurname" placeholder="cognome" required
+						th:field="*{actor.surname}" />
+				</div>
+			</div>
+
+			<div class="mb-3 d-flex align-items-center">
+				<label for="dateOfBirth" class="field-value me-3">Data di nascita</label>
+				<input type="date" class="form-control" id="dateOfBirth" th:name="dateOfBirth"
+					th:value="${actor.dateOfBirth}" required />
+			</div>
+
+			<!-- Sezione per l'immagine-->
+			<div class="mt-3 d-flex align-items-center">
+				<label for="formFile" class="form-label">Carica foto</label>
+				<input class="form-control" type="file" id="formFile" th:name="uploadedImage" accept="image/*">
+			</div>
 
 
-		<!-- Bottone di invio -->
-		<button type="submit">Aggiungi Attore</button>
-	</form>
+			<!-- Bottone di invio -->
+			<div class="mt-3">
+				<button type="submit" class="btn btn-primary">Aggiungi</button>
+			</div>
+		</form>
+	</div>
 
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

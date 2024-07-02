@@ -2,49 +2,58 @@
 <html>
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SiwTheatre - Gestione aggiunta ticket ad opera</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-	<header>
+
+	<header class="d-flex justify-content-between p-3 bg-light">
 		<div th:if="${#request.userPrincipal}">
 			<span th:text="${#request.userPrincipal.principal.username}"></span>
-			<a href="/public/logout">Logout</a>
+			<a href="/public/logout" class="btn btn-outline-secondary ml-2">Logout</a>
 		</div>
 		<div th:unless="${#request.userPrincipal}">
-			<a href="/public/login">Login</a>
+			<a href="/public/login" class="btn btn-outline-primary">Login</a>
 		</div>
 	</header>
 
-	<div><a href="/"><img src="/images/logo-siwtheatre.png" width="50%" /></a></div>
+	<div class="container">
+		<div class="text-center my-4">
+			<a href="/"><img src="/images/logo-siwtheatre.png" class="img-fluid" alt="Logo SIW Theatre" /></a>
+		</div>
 
-	<h1>Gestione dei biglietti per</h1>
-	<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
+		<h1 class="text-center my-4">Gestione dei biglietti per</h1>
+
+		<h2 th:text="'Opera: ' + ${opera.name}">Titolo opera</h2>
 
 
-	<h3>Biglietti disponibili:</h3>
-	<ul>
-		<li th:each="ticket: ${opera.tickets}">
-			<a th:href="@{'/client/ticket/' + ${ticket.id}}"
-				th:text="${ticket.dateEvent}+'   cat: '+${ticket.type}">Data evento
-				+ tipo</a>
-			<form th:action="@{'/admin/deleteTicketFromOpera/' + ${ticket.id} +'/'+${opera.id}}" method="POST">
-				<button type="submit">Rimuovi</button>
+		<div class="mt-4">
+			<h4>Biglietti disponibili:</h4>
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-container"
+					th:each="ticket: ${opera.tickets}">
+					<a th:href="@{'/client/ticket/' + ${ticket.id}}"
+						th:text="${ticket.dateEvent}+'   cat: '+${ticket.type}"></a>
+					<form th:action="@{'/admin/deleteTicketFromOpera/' + ${ticket.id} +'/'+${opera.id}}" method="POST">
+						<button type="submit" class="btn btn-danger btn-sm">Rimuovi</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mt-4">
+			<form th:action="@{'/admin/formNewTicket/'+${opera.id}}" method="GET">
+				<button type="submit" class="btn btn-primary">Aggiungi nuovo biglietto</button>
 			</form>
-		</li>
-	</ul>
-
-	<h3>Aggiungi altri biglietti:</h3>
-	<ul>
-		<li>
-			<a th:href="@{'/admin/formNewTicket/'+${opera.id}}">Modulo per aggiungere un biglietto</a>
-		</li>
-	</ul>
-
-	<div>
-		<a href="/admin/manageOperas"><button type="button">Fine</button></a>
+		</div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
