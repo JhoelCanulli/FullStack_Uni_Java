@@ -26,8 +26,6 @@ public class Client {
 
 	private String surname;
 
-	private String phone;
-
 	@Past
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
@@ -88,14 +86,6 @@ public class Client {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	@Override

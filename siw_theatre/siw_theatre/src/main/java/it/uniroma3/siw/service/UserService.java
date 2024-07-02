@@ -47,7 +47,6 @@ public class UserService {
 		c.setSurname(user.getSurname());
 		c.setDateOfBirth(null);
 		c.setImage(null);
-		c.setPhone(null);
 		this.clientService.saveClient(c);
 		user.setClient(c);
 		return this.userRepo.save(user);
